@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -8,23 +9,16 @@ import (
 
 type Product struct {
 	Name string
-	Id   string
+	Id   int
 }
 
 var Products = []Product{
-	{Name: "Mac", Id: "1"},
-	{Name: "Mac 2", Id: "2"}}
+	{Name: "Mac", Id: 1},
+	{Name: "Mac 2", Id: 2}}
 
 func getProducts(w http.ResponseWriter, r *http.Request) {
 	// fmt.Fprintf(w, Products)
-	// json.NewEncoder(w).Encode(Products)
-	w.Header().Set("Content-type", "text/html")
-	code := "<tr><td>Id</td><td>Name</td></tr>"
-	for _, val := range Products {
-		code += "<tr> <td>" + val.Id + "</td><td>" + val.Name + "</td></tr>"
-	}
-	code = "<table>" + code + "</table>"
-	fmt.Fprint(w, code)
+	json.NewEncoder(w).Encode(Products)
 
 }
 func index(w http.ResponseWriter, r *http.Request) {
