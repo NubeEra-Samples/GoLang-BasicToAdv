@@ -20,6 +20,7 @@ func listofproducts(w http.ResponseWriter, r *http.Request) {
 	samples=append(samples,sample)
 	samples=append(samples,sample1)
 
+	
 	html := `<table>
 	<tr>
 	  <th>id</th>
