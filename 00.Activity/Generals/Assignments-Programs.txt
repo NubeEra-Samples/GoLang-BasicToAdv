@@ -1,8 +1,57 @@
 Golang Program to Print Hello World
+package main
+import "fmt"
+func main(){
+    fmt.Println("hello world)
+}
 Go Program to add Two Numbers
+package main
+func main(){
+    a:=1
+    b:=2
+    c:=a+b
+    fmt.Printf("the sum of %d and %d is %d",a,b,c)
+}
 Go Program to Find the Compound Interest
+package main
+
+import (
+    "fmt"
+    "math"
+)
+
+func main() {
+
+    var Pamount, InterestRate, timePeriod, ciFuture, compoundI float64
+
+    fmt.Print("Enter the Total or Principal Amount = ")
+    fmt.Scanln(&Pamount)
+
+    fmt.Print("Enter the Interest Rate = ")
+    fmt.Scanln(&InterestRate)
+
+    fmt.Print("Enter the Total number of Years = ")
+    fmt.Scanln(&timePeriod)
+
+    ciFuture = Pamount * (math.Pow((1 + InterestRate/100), timePeriod))
+    compoundI = ciFuture - Pamount
+
+    fmt.Println("\nThe Compound Interest  = ", compoundI)
+    fmt.Println("The Future Compound Interest  = ", ciFuture)
+}
+
 Go Program to Count Digits in a Number
+package main
+func main(){
+    v:=123
+    for v{
+        v=v/10
+        count=count+1
+    }
+    fmt.println(count)
+}
 Go Program to Count Total Notes in an Amount
+
 Go Program to Find the Cube of a Number
 Go Program to Calculate the Employee Salary
 Go Program to calculate Electricity Bill
