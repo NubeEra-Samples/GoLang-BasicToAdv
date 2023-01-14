@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
+	"strings"
 )
 
 func main() {
-	s := "Hello I am Asutosh Das"
-	n := []rune(s)
+	s := "Hello I am Shashwat"
 	// delete 5th character
-	temp := append(n[:5], n[6:]...)
+	temp := strings.Replace(s," ", "-", -1)
 	fmt.Printf("%s",string(temp))
 }
