@@ -1,0 +1,50 @@
+Connectivity of RDS Database Server:
+------------------------------------
+URL					: db-mujahed.c8jpy3ccyfce.us-east-1.rds.amazonaws.com
+databaseName	: mycompdb
+UserName 		: admin
+Password 		: 2YbunL2yZ3q6RedeZSro
+
+mysql -h EndPoint -u UserName -p
+Enter Password: Password
+
+
+Windows ^
+Unix ~/`
+
+mysql ^
+	-h EndPoint ^
+	-u UserName 
+	-p ^
+Enter Password: Password
+
+mysql ^
+	-h db-mujahed.c8jpy3ccyfce.us-east-1.rds.amazonaws.com ^
+	-u admin ^
+	-p
+	
+mysql 	-h db-mujahed.c8jpy3ccyfce.us-east-1.rds.amazonaws.com -u admin -p
+	
+	
+
+Database Check/Create:
+-----------------------
+show databases;                     //display all databases
+create database mycompdb;           //create mycompdb database
+drop database a2;                   //Delete a2 database
+show databases;             
+
+
+Execute SQL Commands:
+---------------------
+use mycompdb;                       //Activating Database(Default Database)
+
+show tables;                        //Display all tables in selected/Default database
+
+create table t1                     //Create table called t1(id,name)
+(
+    id int,
+    name varchar(200)
+);
+
+desc t1;                            //Describing Structure/Schema of Table(t1)
