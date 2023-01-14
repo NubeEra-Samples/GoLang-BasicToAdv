@@ -42,3 +42,16 @@ docker info
 
 
 
+10) Download Container Registry Image into Local System
+-------------------------------------------------------
+docker ps           #Display All Running Containers
+docker ps -a        #Display All Running+Stopped Containers
+
+docker images
+
+docker pull postgres
+
+Convert Image to Container
+---------------------------
+docker run -name pg-db-learn -e POSTGRES_PASSWORD=123 -p 5432:5432 postgres
+
