@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	s := "Hello I am Asutosh Das"
+	s := "Hello I am Shashwat"
 	n := []rune(s)
 	// delete 5th character
 	temp := append(n[:5], n[6:]...)
