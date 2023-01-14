@@ -6,8 +6,8 @@ import (
 )
 
 func main() {
-	s := "Hello I am Asutosh Das"
+	s := "My name is Aditya"
 	// delete 5th character
-	temp := strings.Replace(s," ", "-", -1)
-	fmt.Printf("%s",string(temp))
+	temp := strings.Replace(s, " ", "-", -1)
+	fmt.Printf("%s", string(temp))
 }
