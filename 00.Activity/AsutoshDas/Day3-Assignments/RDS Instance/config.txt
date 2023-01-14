@@ -1,0 +1,5 @@
+URL     : database-asutosh.c8jpy3ccyfce.us-east-1.rds.amazonaws.com
+DBNAME  : Golang
+DBUSER  : admin
+DBPASS  : 5Jw6x6Z97gKuoCKcrpo1
+DBPORT  : 3306
