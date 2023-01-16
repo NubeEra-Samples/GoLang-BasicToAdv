@@ -1,0 +1,11 @@
+Connect to postgres
+-------------------
+psql -h PostgreServerPublicIP -d DatabaseName -U UserName -W
+psql -d DatabaseName -U UserName -W
+
+List all Objects:
+-------------------
+\l                      #List All Databases
+CREATE DATABASE myDatabase
+\c DatabaseName         #Connect to Database
+\c myDatabase
