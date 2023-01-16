@@ -1,0 +1,24 @@
+mkdir db
+mkdir db\migration
+
+migrate create -ext sql -dir db/migration -seq mydb
+
+"postgresql://UserName:Password@PostgreSQLIP:5432/DatabaseName"
+
+"postgresql://root:123@127.0.0.1:5432/d1"
+
+
+psql -h 127.0.0.1 -d d1 -U root -W
+
+
+migrate -path db/migration -database "postgresql://root:123@127.0.0.1:5432/d1" -verbose up
+
+migrate -path db/migration -database "postgresql://root:123@127.0.0.1:5432/d1?sslmode=disable" -verbose up
+
+
+
+
+
+
+
+

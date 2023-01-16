@@ -1,6 +1,8 @@
 Connect to postgres
 -------------------
 psql -h PostgreServerPublicIP -d DatabaseName -U UserName -W
+
+psql -h 127.0.0.1 -d d1 -U root -W
 psql -d DatabaseName -U UserName -W
 
 List all Objects:
@@ -43,3 +45,8 @@ Table Posts  as P1{
 }
 
 Ref: "P1"."PostId" < "Users"."UserID"
+
+
+DROP TABLE IF EXISTS "Posts";
+DROP TABLE IF EXISTS "Users";
+DROP TABLE IF EXISTS "schema_migrations";
