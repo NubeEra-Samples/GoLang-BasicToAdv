@@ -53,7 +53,7 @@ docker pull postgres
 
 Convert Image to Container
 ---------------------------
-docker run -name pg-db-learn -e POSTGRES_PASSWORD=123 -p 5432:5432 postgres
+docker run --name pg-db-learn -e POSTGRES_PASSWORD=123 -p 5432:5432 postgres
 
 docker run --name pg-db-learn -e POSTGRES_PASSWORD=123 -d postgres
 docker run -it --rm --link pg-db-learn:postgres postgres psql -h postgres -U postgres
