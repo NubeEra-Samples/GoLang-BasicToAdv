@@ -9,3 +9,21 @@ List all Objects:
 CREATE DATABASE myDatabase
 \c DatabaseName         #Connect to Database
 \c myDatabase
+
+
+Create Table
+-------------
+create table t1 (
+    Id SERIAL PRIMARY KEY,
+    Name TEXT,
+    Age INT NOT NULL
+);
+
+\d   --> Display All Objects in Selected Database
+\dt  --> Display Object(Table) in Selected Database
+
+
+
+
+
+
