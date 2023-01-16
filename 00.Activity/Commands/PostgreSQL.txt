@@ -22,8 +22,24 @@ create table t1 (
 \d   --> Display All Objects in Selected Database
 \dt  --> Display Object(Table) in Selected Database
 
+INSERT INTO t1(Name,Age) VALUES('A',22);
+
+SELECT * FROM T1;
+
+INSERT INTO t1(Name,Age) VALUES('b',20);
+
+delete from t1 where id=2;
 
 
 
+Table Users{
+  UserID integer [pk]
+}
 
+Table Posts  as P1{
+  PostId Integer [pk]
+  address varchar(255) [unique,not null, note:'Client addresses']
+  UserID integer [ref: > Users.UserID]
+}
 
+Ref: "P1"."PostId" < "Users"."UserID"
