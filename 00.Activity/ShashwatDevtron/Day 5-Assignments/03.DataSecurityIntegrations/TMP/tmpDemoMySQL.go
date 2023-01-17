@@ -5,8 +5,8 @@ import (
 	"log"           // Display messages to console
 	"net/http"      // Manage URL
 	"text/template" // Manage HTML files
-
-	_ "github.com/lib/pg"// MySQL Database driver
+	"fmt"
+	_ "github.com/lib/pq" // MySQL Database driver
 )
 
 // Struct used to send data to template
@@ -17,25 +17,38 @@ type Names struct {
 	Email string
 }
 
+
 // Function dbConn opens connection with MySQL driver
 // send the parameter `db *sql.DB` to be used by another functions
+var db *sql.DB
 func dbConn() (db *sql.DB) {
+	
+		host    := "127.0.0.1"
+		port     := 5433
+		user     := "postgres"
+		password := "sdadhich"
+		dbName   := "a1"
+	
+	
+	
+	//connStr := "postgres://postgres:password@localhost/DB_1?sslmode=disable"
+	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbName)
+	db, err := sql.Open("postgres", connStr)
 
-	dbDriver := "postgres" // Database driver
-	dbUser := "postgrest"    // Mysql username
-	dbPass := "sdadhich"     // Mysql password
-	dbName := "a1"      // Mysql schema
+	CheckError(err)
 
-	// Realize the connection with mysql driver
-	db, err := sql.Open(dbDriver, dbUser+":"+dbPass+"@/"+dbName)
+	err = db.Ping()
 
-	// If error stop the application
-	if err != nil {
-		panic(err.Error())
-	}
+	CheckError(err)
 
-	// Return db object to be used by other functions
+	// this will be printed in the terminal, confirming the connection to the database
+	fmt.Println("The database is connected")
 	return db
+}
+func CheckError(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
 
 // Read all templates on folder `tmpl/*`
@@ -97,7 +110,7 @@ func Show(w http.ResponseWriter, r *http.Request) {
 	nId := r.URL.Query().Get("id")
 
 	// Perform a SELECT query getting the register Id(See above) and check for errors
-	selDB, err := db.Query("SELECT * FROM names WHERE id=?", nId)
+	selDB, err := db.Query("SELECT * FROM names WHERE id=$1", nId)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -149,11 +162,12 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 	// Get the URL `?id=X` parameter
 	nId := r.URL.Query().Get("id")
 
-	selDB, err := db.Query("SELECT * FROM names WHERE id=?", nId)
+	selDB, err := db.Query("SELECT * FROM names WHERE id=$1", nId)
 	if err != nil {
 		panic(err.Error())
 	}
 
+	
 	n := Names{}
 
 	for selDB.Next() {
@@ -190,13 +204,17 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 		email := r.FormValue("email")
 
 		// Prepare a SQL INSERT and check for errors
-		insForm, err := db.Prepare("INSERT INTO names(name, email) VALUES(?,?)")
+		// insForm, err := db.Prepare("INSERT INTO names(name, email) VALUES(?,?)")
+		// if err != nil {
+		// 	panic(err.Error())
+		// }
+
+		// // Execute the prepared SQL, getting the form fields
+		// insForm.Exec(name, email)
+		_,err := db.Exec("INSERT INTO names(name, email) VALUES($1,$2)",name, email)
 		if err != nil {
 			panic(err.Error())
 		}
-
-		// Execute the prepared SQL, getting the form fields
-		insForm.Exec(name, email)
 
 		// Show on console the action
 		log.Println("INSERT: Name: " + name + " | E-mail: " + email)
@@ -223,7 +241,7 @@ func Update(w http.ResponseWriter, r *http.Request) {
 		id := r.FormValue("uid") // This line is a hidden field on form (View the file: `tmpl/Edit`)
 
 		// Prepare the SQL Update
-		insForm, err := db.Prepare("UPDATE names SET name=?, email=? WHERE id=?")
+		insForm, err := db.Prepare("UPDATE names SET name=$1, email=$2 WHERE id=$3")
 		if err != nil {
 			panic(err.Error())
 		}
@@ -250,7 +268,7 @@ func Delete(w http.ResponseWriter, r *http.Request) {
 	nId := r.URL.Query().Get("id")
 
 	// Prepare the SQL Delete
-	delForm, err := db.Prepare("DELETE FROM names WHERE id=?")
+	delForm, err := db.Prepare("DELETE FROM names WHERE id=$1")
 	if err != nil {
 		panic(err.Error())
 	}

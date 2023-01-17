@@ -4,15 +4,15 @@ import (
 	"database/sql"
 	"fmt"
 
-	_ "github.com/lib/pq"
+	_ "github.com/lib/pg"
 )
 
 const (
 	host     = "127.0.0.1"
-	port     = 5432
+	port     = 5433
 	user     = "postgres"
-	password = "shivam@devtron.ai"
-	dbName   = "dbshivam"
+	password = "sdadhich"
+	dbName   = "d1"
 )
 
 var db *sql.DB
