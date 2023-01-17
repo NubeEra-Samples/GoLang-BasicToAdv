@@ -7,7 +7,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Welcome Line1"
-      - run: echo "Welcome Line2"
       - run: ls ~
       - run: pwd
       - run: ls ${{ github.workspace }}
