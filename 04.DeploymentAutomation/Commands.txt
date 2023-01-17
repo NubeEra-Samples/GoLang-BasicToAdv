@@ -1,0 +1,13 @@
+docker build -t ImageName .
+
+docker images
+
+docker run -it --rm -p 8010:8010 -v $PWD/src:/go/src/mathapp ImageName
+
+
+curl http://localhost:1234/Actions
+
+
+RUN go mod download
+RUN go mod verify
+RUN go build -o mathapp
