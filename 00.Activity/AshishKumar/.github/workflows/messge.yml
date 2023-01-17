@@ -1,0 +1,15 @@
+name: "First Github Action"
+
+on: [push] 
+
+jobs:
+  Job1-Message-Action:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Welcome Line1"
+      - run: echo "Welcome Line2"
+      - run: ls ~
+      - run: pwd
+      - run: ls ${{ github.workspace }}
+      - run: echo "OS is ${{ runner.os }}"
+      - run: echo "Github Event is ${{ github.event_name }}"

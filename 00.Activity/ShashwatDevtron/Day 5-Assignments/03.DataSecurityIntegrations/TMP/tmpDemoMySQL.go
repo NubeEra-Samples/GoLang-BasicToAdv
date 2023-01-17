@@ -1,12 +1,12 @@
 package main
 
 import (
-	"database/sql" // Database SQL package to perform queries
-	"fmt"
+	"database/sql"  // Database SQL package to perform queries
 	"log"           // Display messages to console
 	"net/http"      // Manage URL
 	"text/template" // Manage HTML files
-	_ "github.com/lib/pq" // PgSQL Database driver
+	"fmt"
+	_ "github.com/lib/pq" // MySQL Database driver
 )
 
 // Struct used to send data to template
@@ -17,30 +17,32 @@ type Names struct {
 	Email string
 }
 
+
 // Function dbConn opens connection with MySQL driver
 // send the parameter `db *sql.DB` to be used by another functions
 var db *sql.DB
-
 func dbConn() (db *sql.DB) {
-
-	host := "127.0.0.1"
-	port := 5432
-	user := "postgres"
-	password := "Aditya@123"
-	dbName := "d1"
-
-	// Realize the connection with mysql driver
-	var err error
+	
+		host    := "127.0.0.1"
+		port     := 5433
+		user     := "postgres"
+		password := "sdadhich"
+		dbName   := "a1"
+	
+	
+	
+	//connStr := "postgres://postgres:password@localhost/DB_1?sslmode=disable"
 	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbName)
-	db, err = sql.Open("postgres", connStr)
+	db, err := sql.Open("postgres", connStr)
 
 	CheckError(err)
 
 	err = db.Ping()
 
 	CheckError(err)
+
+	// this will be printed in the terminal, confirming the connection to the database
 	fmt.Println("The database is connected")
-	// Return db object to be used by other functions
 	return db
 }
 func CheckError(err error) {
@@ -165,6 +167,7 @@ func Edit(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 
+	
 	n := Names{}
 
 	for selDB.Next() {
@@ -201,17 +204,18 @@ func Insert(w http.ResponseWriter, r *http.Request) {
 		email := r.FormValue("email")
 
 		// Prepare a SQL INSERT and check for errors
-		// _, err := db.Query()
-		// fmt.Println(err)
+		// insForm, err := db.Prepare("INSERT INTO names(name, email) VALUES(?,?)")
 		// if err != nil {
 		// 	panic(err.Error())
 		// }
 
-		// Execute the prepared SQL, getting the form fields
+		// // Execute the prepared SQL, getting the form fields
+		// insForm.Exec(name, email)
 		_,err := db.Exec("INSERT INTO names(name, email) VALUES($1,$2)",name, email)
 		if err != nil {
 			panic(err.Error())
 		}
+
 		// Show on console the action
 		log.Println("INSERT: Name: " + name + " | E-mail: " + email)
 	}

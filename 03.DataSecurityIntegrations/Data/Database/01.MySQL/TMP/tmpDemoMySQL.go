@@ -6,7 +6,7 @@ import (
 	"net/http"      // Manage URL
 	"text/template" // Manage HTML files
 
-	_ "github.com/go-sql-driver/mysql" // MySQL Database driver
+	_ "github.com/lib/pg"// MySQL Database driver
 )
 
 // Struct used to send data to template
@@ -21,9 +21,9 @@ type Names struct {
 // send the parameter `db *sql.DB` to be used by another functions
 func dbConn() (db *sql.DB) {
 
-	dbDriver := "mysql" // Database driver
-	dbUser := "root"    // Mysql username
-	dbPass := "123"     // Mysql password
+	dbDriver := "postgres" // Database driver
+	dbUser := "postgrest"    // Mysql username
+	dbPass := "sdadhich"     // Mysql password
 	dbName := "a1"      // Mysql schema
 
 	// Realize the connection with mysql driver
