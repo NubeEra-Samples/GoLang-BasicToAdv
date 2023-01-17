@@ -19,7 +19,7 @@ func main() {
 
 	// INSERT INTO T1(Id,Name) VALUES(3,'CCC')
 	fmt.Println("Inserting Data")
-	insert, err := db.Query("INSERT INTO T1(Id,Name) VALUES(3,'CCC')")
+	insert, err := db.Query("INSERT INTO t1(Id,Name) VALUES(3,'CCC')")
 
 	if err != nil {
 		panic(err.Error())
