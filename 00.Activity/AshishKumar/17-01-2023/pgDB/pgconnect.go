@@ -3,25 +3,19 @@ package main
 import (
 	"database/sql"
 	"fmt"
-
+    "github.com/spf13/viper"
 	_ "github.com/lib/pq"
-)
-
-const (
-	host     = "127.0.0.1"
-	port     = 5432
-	user     = "root"
-	password = "123"
-	dbName   = "d1"
 )
 
 var db *sql.DB
 
 // This function will make a connection to the database only once.
 func main() {
+	viper.SetConfigFile(".env")
+	viper.ReadInConfig()
 	var err error
 	//connStr := "postgres://postgres:password@localhost/DB_1?sslmode=disable"
-	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbName)
+	connStr := fmt.Sprintf("host=%v port=%v user=%v password=%v dbname=%v sslmode=disable", viper.Get("host"), viper.Get("port"), viper.Get("user"), viper.Get("password"), viper.Get("dbName"))
 	db, err = sql.Open("postgres", connStr)
 
 	CheckError(err)
