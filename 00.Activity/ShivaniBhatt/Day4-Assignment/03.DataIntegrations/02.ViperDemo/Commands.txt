@@ -1,0 +1,32 @@
+1) Create .env file
+-------------------
+VariableName=Value
+
+2) Create main.go
+-----------------
+package main
+
+import (
+	"fmt"
+	"github.com/spf13/viper"
+)
+
+func main() {
+	viper.SetConfigFile(".env")
+    viper.ReadInFile()
+
+    fmt.Println( viper.Get("EnvName") )
+}
+
+3) Init Mod
+-----------
+go mod init a.b/c
+go mod tidy
+
+4) Install Viper
+-----------------
+go get github.com/spf13/viper
+
+go run main.go
+
+
